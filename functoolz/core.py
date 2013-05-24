@@ -1,3 +1,6 @@
+def identity(x):
+    return x
+
 def remove(predicate, coll):
     """ Return those items of collection for which predicate(item) is true.
 
