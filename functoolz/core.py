@@ -86,3 +86,44 @@ def thread_last(val, *forms):
             args = args + (val,)
             return fn(*args)
     return reduce(evalform_back, forms, val)
+
+
+def hashable(x):
+    try:
+        hash(x)
+        return True
+    except TypeError:
+        return False
+
+
+import collections
+def memoize(f, cache=None):
+    """ Cache a function's result for speedy future evaluation
+
+    Considerations:
+        Trades memory for speed
+        Only use on pure functions
+
+    >>> def add(x, y):  return x + y
+    >>> add = memoize(add)
+
+    Or use as a decorator
+
+    >>> @memoize
+    ... def add(x, y):
+    ...     return x + y
+    """
+    if cache == None:
+        cache = {}
+    def memof(*args):
+        if not hashable(args):
+            return f(*args)
+        elif args in cache:
+            return cache[args]
+        else:
+            result = f(*args)
+            cache[args] = result
+            return result
+    memof.__name__ = f.__name__
+    memof.__doc__ = f.__doc__
+    return memof
