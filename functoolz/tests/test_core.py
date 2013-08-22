@@ -7,7 +7,7 @@ def inc(x):            return x + 1
 def double(x):         return 2*x
 
 def test_remove():
-    assert remove(even, range(5)) == filter(odd, range(5))
+    assert list(remove(even, range(5))) == list(filter(odd, range(5)))
 
 def test_thread_first():
     assert thread_first(2) == 2
@@ -17,4 +17,4 @@ def test_thread_first():
     assert thread_first(2, (add, 5), double) == 14
 
 def test_thread_last():
-    assert thread_last([1, 2, 3], (map, inc), (filter, even)) == [2, 4]
+    assert list(thread_last([1, 2, 3], (map, inc), (filter, even))) == [2, 4]

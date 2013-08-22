@@ -1,3 +1,5 @@
+from functools import reduce
+
 def identity(x):
     return x
 
@@ -8,7 +10,7 @@ def remove(predicate, coll):
     >>> from functoolz import remove
     >>> def even(x):
     ...     return x % 2 == 0
-    >>> remove(even, [1, 2, 3, 4])
+    >>> list(remove(even, [1, 2, 3, 4]))
     [1, 3]
     """
     return filter(lambda x: not predicate(x), coll)
@@ -70,7 +72,7 @@ def thread_last(val, *forms):
         g(y, z, f(x))
 
     >>> def even(x): return x % 2 == 0
-    >>> thread_last([1, 2, 3], (map, inc), (filter, even))
+    >>> list(thread_last([1, 2, 3], (map, inc), (filter, even)))
     [2, 4]
 
     See Also:
