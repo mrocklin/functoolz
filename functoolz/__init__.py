@@ -1,1 +1,3 @@
-from .core import remove, memoize, thread_first, thread_last, curry
+from .core import (remove, iterate, accumulate,
+        memoize, curry,
+        thread_first, thread_last)

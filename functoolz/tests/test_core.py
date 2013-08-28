@@ -1,4 +1,4 @@
-from functoolz.core import (iterate, remove,
+from functoolz.core import (accumulate, iterate, remove,
         thread_first, thread_last,
         memoize, curry)
 from operator import add, mul
@@ -54,3 +54,7 @@ def test_curry_kwargs():
 
 def test_iterate():
     assert list(itertools.islice(iterate(inc, 0), 0, 5)) == [0, 1, 2, 3, 4]
+
+def test_accumulate():
+    assert list(accumulate(add, [1, 2, 3, 4, 5])) == [1, 3, 6, 10, 15]
+    assert list(accumulate(mul, [1, 2, 3, 4, 5])) == [1, 2, 6, 24, 120]

@@ -1,4 +1,5 @@
 from functools import reduce
+import itertools
 
 def identity(x):
     return x
@@ -185,3 +186,25 @@ def iterate(f, x):
     while True:
         yield x
         x = f(x)
+
+def accumulate(f, seq):
+    """ Repeatedly apply binary function ``f`` to elements in sequence and
+    accumulate the result
+
+    >>> from operator import add, mul
+    >>> list(accumulate(add, [1, 2, 3, 4, 5]))
+    [1, 3, 6, 10, 15]
+    >>> list(accumulate(mul, [1, 2, 3, 4, 5]))
+    [1, 2, 6, 24, 120]
+
+    Good for making functions like ``cumsum``
+
+    >>> import functools
+    >>> sum     = functools.partial(reduce, add)
+    >>> cumsum  = functools.partial(accumulate, add)
+    """
+    result = next(iter(seq))
+    yield result
+    for elem in itertools.islice(seq, 1, None):
+        result = f(result, elem)
+        yield result
