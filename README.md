@@ -3,6 +3,8 @@ Functoolz
 
 More useful tools for Python functions.
 
+[![Build Status](https://travis-ci.org/mrocklin/functoolz.png)](https://travis-ci.org/mrocklin/functoolz)
+
 Dependencies
 ------------
 
