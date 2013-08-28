@@ -202,6 +202,9 @@ def accumulate(f, seq):
     >>> import functools
     >>> sum     = functools.partial(reduce, add)
     >>> cumsum  = functools.partial(accumulate, add)
+
+    See Also:
+        itertools.accumulate :  In standard itertools for Python 3.2+
     """
     result = next(iter(seq))
     yield result
