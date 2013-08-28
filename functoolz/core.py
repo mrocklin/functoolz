@@ -188,8 +188,7 @@ def iterate(f, x):
         x = f(x)
 
 def accumulate(f, seq):
-    """ Repeatedly apply binary function ``f`` to elements in sequence and
-    accumulate the result
+    """ Repeatedly apply binary function f to a sequence, accumulating results
 
     >>> from operator import add, mul
     >>> list(accumulate(add, [1, 2, 3, 4, 5]))
@@ -197,11 +196,12 @@ def accumulate(f, seq):
     >>> list(accumulate(mul, [1, 2, 3, 4, 5]))
     [1, 2, 6, 24, 120]
 
-    Good for making functions like ``cumsum``
+    Accumulate is similar to ``reduce`` and is good for making functions like
+    cumulative sum
 
-    >>> import functools
-    >>> sum     = functools.partial(reduce, add)
-    >>> cumsum  = functools.partial(accumulate, add)
+    >>> from functools import partial
+    >>> sum    = partial(reduce, add)
+    >>> cumsum = partial(accumulate, add)
 
     See Also:
         itertools.accumulate :  In standard itertools for Python 3.2+
