@@ -2,9 +2,9 @@ from os.path import exists
 from setuptools import setup
 
 setup(name='functoolz',
-      version='0.1',
+      version='0.2',
       description='More function tools',
-      url='http://github.com/mrocklin/functoolz',
+      url='http://github.com/mrocklin/functoolz/',
       author='Matthew Rocklin',
       author_email='mrocklin@gmail.com',
       license='BSD',
