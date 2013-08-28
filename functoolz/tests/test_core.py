@@ -1,5 +1,9 @@
-from functoolz.core import remove, thread_first, thread_last, memoize, curry
+from functoolz.core import (iterate, remove,
+        thread_first, thread_last,
+        memoize, curry)
 from operator import add, mul
+
+import itertools
 
 def even(x):           return x % 2 == 0
 def odd(x):            return x % 2 == 1
@@ -47,3 +51,6 @@ def test_curry_kwargs():
     assert f(1, 2) == 30
     assert f(1, c=3)(2) == 9
     assert f(c=3)(1, 2) == 9
+
+def test_iterate():
+    assert list(itertools.islice(iterate(inc, 0), 0, 5)) == [0, 1, 2, 3, 4]

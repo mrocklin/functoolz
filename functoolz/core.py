@@ -167,3 +167,21 @@ class curry(object):
             return self.func(*args, **kwargs)
         except TypeError:
             return curry(self.func, *args, **kwargs)
+
+def iterate(f, x):
+    """ Repeatedly apply a function f onto an original input
+
+    Yields x, then f(x), then f(f(x)), then f(f(f(x))), etc..
+
+    >>> def inc(x):  return x + 1
+    >>> it = iterate(inc, 0)
+    >>> next(it)
+    0
+    >>> next(it)
+    1
+    >>> next(it)
+    2
+    """
+    while True:
+        yield x
+        x = f(x)
