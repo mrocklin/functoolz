@@ -2,7 +2,7 @@ from os.path import exists
 from setuptools import setup
 
 setup(name='functoolz',
-      version='0.2',
+      version='0.3',
       description='More function tools',
       url='http://github.com/mrocklin/functoolz/',
       author='Matthew Rocklin',
