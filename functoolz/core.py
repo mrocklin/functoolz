@@ -127,3 +127,43 @@ def memoize(f, cache=None):
     memof.__name__ = f.__name__
     memof.__doc__ = f.__doc__
     return memof
+
+
+class curry(object):
+    """ Curry a callable function
+
+    Enables partial application of arguments through calling a function with an
+    incomplete set of arguments.
+
+    >>> def mul(x, y):
+    ...     return x * y
+    >>> mul = curry(mul)
+
+    >>> double = mul(2)
+    >>> double(10)
+    20
+
+    Also supports keyword arguments
+
+    >>> @curry                  # Can use curry as a decorator
+    ... def f(x, y, a=10):
+    ...     return a * (x + y)
+
+    >>> add = f(a=1)
+    >>> add(2, 3)
+    5
+    """
+    def __init__(self, func, *args, **kwargs):
+        self.func = func
+        self.args = args
+        self.kwargs = kwargs
+
+    def __call__(self, *args, **_kwargs):
+        args = self.args + args
+        kwargs = {}
+        kwargs.update(self.kwargs)
+        kwargs.update(_kwargs)
+        try:
+            return self.func(*args, **kwargs)
+        except TypeError:
+            return curry(self.func, *args, **kwargs)

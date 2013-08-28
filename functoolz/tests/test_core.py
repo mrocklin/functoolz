@@ -1,4 +1,4 @@
-from functoolz.core import remove, thread_first, thread_last, memoize
+from functoolz.core import remove, thread_first, thread_last, memoize, curry
 from operator import add, mul
 
 def even(x):           return x % 2 == 0
@@ -31,3 +31,19 @@ def test_memoize():
     assert mf(2, 3) == mf(2, 3)
     assert fn_calls == [1]  # function was only called once
     assert mf.__doc__ == f.__doc__
+
+def test_curry_simple():
+    cmul = curry(mul)
+    double = cmul(2)
+    assert callable(double)
+    assert double(10) == 20
+
+def test_curry_kwargs():
+    def f(a, b, c=10):
+        return (a + b)*c
+    f = curry(f)
+    assert f(1, 2, 3) == 9
+    assert f(1)(2, 3) == 9
+    assert f(1, 2) == 30
+    assert f(1, c=3)(2) == 9
+    assert f(c=3)(1, 2) == 9
