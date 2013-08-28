@@ -5,18 +5,6 @@ def identity(x):
     return x
 
 
-def remove(predicate, coll):
-    """ Return those items of collection for which predicate(item) is true.
-
-    >>> from functoolz import remove
-    >>> def even(x):
-    ...     return x % 2 == 0
-    >>> list(remove(even, [1, 2, 3, 4]))
-    [1, 3]
-    """
-    return filter(lambda x: not predicate(x), coll)
-
-
 def thread_first(val, *forms):
     """ Thread value through a sequence of functions/forms
 
@@ -168,6 +156,19 @@ class curry(object):
             return self.func(*args, **kwargs)
         except TypeError:
             return curry(self.func, *args, **kwargs)
+
+
+def remove(predicate, coll):
+    """ Return those items of collection for which predicate(item) is true.
+
+    >>> from functoolz import remove
+    >>> def even(x):
+    ...     return x % 2 == 0
+    >>> list(remove(even, [1, 2, 3, 4]))
+    [1, 3]
+    """
+    return filter(lambda x: not predicate(x), coll)
+
 
 def iterate(f, x):
     """ Repeatedly apply a function f onto an original input
