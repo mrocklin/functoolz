@@ -85,7 +85,6 @@ def hashable(x):
         return False
 
 
-import collections
 def memoize(f, cache=None):
     """ Cache a function's result for speedy future evaluation
 
